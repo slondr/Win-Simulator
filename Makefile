@@ -1,12 +1,10 @@
 C = gcc
 FLAGS = -lncurses
-OBJS = win.o main.o
-SRCS = $(OBJS, .o=.c) #!!!
 
 all:
-	gcc -c win.c
-	gcc -c main.c
-	gcc -o win main.o win.o -lncurses
+	$(C) -c win.c
+	$(C) -c main.c
+	$(C) -o win main.o win.o $(FLAGS)
 
 clean:
 	rm -f win
