@@ -1,5 +1,5 @@
 C = gcc
-FLAGS = -lncurses
+FLAGS = -lncurses -Wall
 
 all:
 	$(C) -c win.c
