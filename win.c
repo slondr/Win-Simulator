@@ -31,11 +31,7 @@ void construct_game() {
   short right = 1;
   nodelay(stdscr, 1); // getch doesn't block
   while(getch() != 10) {
-    if(right) {
-      counter++;
-    } else {
-      counter--;
-    }
+    counter += (right? 1 : -1);
     
     if(counter > RIGHT_B) {
       right = 0;
