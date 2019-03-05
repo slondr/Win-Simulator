@@ -1,4 +1,5 @@
 #ifndef WIN
+#define WIN
 #pragma once
 
 const char splash_message[965];
