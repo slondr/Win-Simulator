@@ -17,16 +17,14 @@
 #include <ncurses.h>
 
 #define RIGHT_B 93
+#define ATTRIB_LEN 19
 
 const char splash_message[] = "\n$$\\      $$\\ $$\\                  $$$$$$\\  $$\\                         $$\\            $$\\                         \n$$ | $\\  $$ |\\__|                $$  __$$\\ \\__|                        $$ |           $$ |                       \n$$ |$$$\\ $$ |$$\\ $$$$$$$\\        $$ /  \\__|$$\\ $$$$$$\\$$$$\\  $$\\   $$\\ $$ | $$$$$$\\ $$$$$$\\    $$$$$$\\   $$$$$$\\  \n$$ $$ $$\\$$ |$$ |$$  __$$\\       \\$$$$$$\\  $$ |$$  _$$  _$$\\ $$ |  $$ |$$ | \\____$$\\\\_$$  _|  $$  __$$\\ $$  __$$\\ \n$$$$  _$$$$ |$$ |$$ |  $$ |       \\____$$\\ $$ |$$ / $$ / $$ |$$ |  $$ |$$ | $$$$$$$ | $$ |    $$ /  $$ |$$ |  \\__|\n$$$  / \\$$$ |$$ |$$ |  $$ |      $$\\   $$ |$$ |$$ | $$ | $$ |$$ |  $$ |$$ |$$  __$$ | $$ |$$\\ $$ |  $$ |$$ |      \n$$  /   \\$$ |$$ |$$ |  $$ |      \\$$$$$$  |$$ |$$ | $$ | $$ |\\$$$$$$  |$$ |\\$$$$$$$ | \\$$$$  |\\$$$$$$  |$$ |      \n\\__/     \\__|\\__|\\__|  \\__|       \\______/ \\__|\\__| \\__| \\__| \\______/ \\__| \\_______|  \\____/  \\______/ \\__|\n                                                    \n\n                 Press [Enter] to Begin";
 
 void construct_game(void) {
   // builds the screen and displays the splash message & animatiion
-  
   initscr();
-  erase();
-  printw(splash_message);
-  refresh();
+  printw_ubuf(splash_message);
   short counter = 0;
   short right = 1;
   nodelay(stdscr, 1); // getch doesn't block
@@ -41,7 +39,7 @@ void construct_game(void) {
     for(short index = 0; index < counter; ++index)
       mvprintw(0, index, " ");
     
-    for(short index = 19 /* length of attribution string */; index < 500; ++index)
+    for(short index = ATTRIB_LEN; index < 500; ++index)
       mvprintw(0, index, " ");
     
     mvprintw(0, counter, "by Eric S. Londres");
@@ -56,9 +54,13 @@ void destroy_game(void) {
   printf("Thank you for playing!\nFor other high-quality content, visit my website at slondr.ml.\n");
 }
 
-void printw_buf(const char * message) {
+void printw_ubuf(const char * message) {
   erase();
   printw(message);
   refresh();
+}
+
+void printw_buf(const char * message) {
+  printw_ubuf(message);
   getch();
 }
