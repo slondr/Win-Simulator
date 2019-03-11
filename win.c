@@ -20,7 +20,7 @@
 
 const char splash_message[] = "\n$$\\      $$\\ $$\\                  $$$$$$\\  $$\\                         $$\\            $$\\                         \n$$ | $\\  $$ |\\__|                $$  __$$\\ \\__|                        $$ |           $$ |                       \n$$ |$$$\\ $$ |$$\\ $$$$$$$\\        $$ /  \\__|$$\\ $$$$$$\\$$$$\\  $$\\   $$\\ $$ | $$$$$$\\ $$$$$$\\    $$$$$$\\   $$$$$$\\  \n$$ $$ $$\\$$ |$$ |$$  __$$\\       \\$$$$$$\\  $$ |$$  _$$  _$$\\ $$ |  $$ |$$ | \\____$$\\\\_$$  _|  $$  __$$\\ $$  __$$\\ \n$$$$  _$$$$ |$$ |$$ |  $$ |       \\____$$\\ $$ |$$ / $$ / $$ |$$ |  $$ |$$ | $$$$$$$ | $$ |    $$ /  $$ |$$ |  \\__|\n$$$  / \\$$$ |$$ |$$ |  $$ |      $$\\   $$ |$$ |$$ | $$ | $$ |$$ |  $$ |$$ |$$  __$$ | $$ |$$\\ $$ |  $$ |$$ |      \n$$  /   \\$$ |$$ |$$ |  $$ |      \\$$$$$$  |$$ |$$ | $$ | $$ |\\$$$$$$  |$$ |\\$$$$$$$ | \\$$$$  |\\$$$$$$  |$$ |      \n\\__/     \\__|\\__|\\__|  \\__|       \\______/ \\__|\\__| \\__| \\__| \\______/ \\__| \\_______|  \\____/  \\______/ \\__|\n                                                    \n\n                 Press [Enter] to Begin";
 
-void construct_game() {
+void construct_game(void) {
   // builds the screen and displays the splash message & animatiion
   
   initscr();
@@ -33,19 +33,16 @@ void construct_game() {
   while(getch() != 10) {
     counter += (right? 1 : -1);
     
-    if(counter > RIGHT_B) {
+    if(counter > RIGHT_B)
       right = 0;
-    } else if(counter < 1) {
+    else if(counter < 1)
       right = 1;
-    }
     
-    for(short index = 0; index < counter; ++index) {
+    for(short index = 0; index < counter; ++index)
       mvprintw(0, index, " ");
-    }
     
-    for(short index = 19 /* length of attribution string */; index < 500; ++index) {
+    for(short index = 19 /* length of attribution string */; index < 500; ++index)
       mvprintw(0, index, " ");
-    } 
     
     mvprintw(0, counter, "by Eric S. Londres");
     refresh();
@@ -54,7 +51,7 @@ void construct_game() {
   nodelay(stdscr, 0); // getch blocks again
 }
 
-void destroy_game() {
+void destroy_game(void) {
   endwin();
   printf("Thank you for playing!\nFor other high-quality content, visit my website at slondr.ml.\n");
 }
