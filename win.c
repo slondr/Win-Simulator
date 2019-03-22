@@ -16,6 +16,8 @@
 #include <unistd.h>
 #include <ncurses.h>
 
+#include "win.h"
+
 #define RIGHT_B 93
 #define ATTRIB_LEN 19
 
